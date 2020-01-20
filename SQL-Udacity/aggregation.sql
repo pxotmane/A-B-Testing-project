@@ -198,6 +198,7 @@ JOIN region r
 ON r.id = s.region_id
 GROUP BY r.name, w.channel
 ORDER BY num_events DESC;
+<<<<<<< HEAD
 
 /***************************/
 /****DISTINCT exercices****/
@@ -328,3 +329,5 @@ Which account used facebook most as a channel?
 
 
 Which channel was most frequently used by most accounts?
+=======
+>>>>>>> 5aad5912f19cd66e9b82d98d968a840e0fab1533
