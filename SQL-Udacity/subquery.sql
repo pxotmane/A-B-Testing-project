@@ -42,3 +42,30 @@ SELECT SUM(total_amt_usd)
 FROM orders
 WHERE DATE_TRUNC('month', occurred_at) =
       (SELECT DATE_TRUNC('month', MIN(occurred_at)) FROM orders);
+/************************/
+/****Subquery QUIZZ ****/
+/**********************/
+/* 1-Provide the name of the sales_rep in each region with the largest amount of total_amt_usd sales.*/
+SELECT RegionNAME, SalesRepsNAME, MAX(total_sales)
+FROM(
+  SELECT r.name AS RegionNAME, s.name AS SalesRepsNAME, SUM(o.total_amt_usd) AS total_sales
+  FROM region r
+  JOIN sales_reps s ON s.region_id = r.id
+  JOIN accounts a ON a.sales_rep_id = s.id
+  JOIN orders o ON o.account_id = a.id
+  GROUP BY r.name, s.name) SRAL
+GROUP BY 1, 2
+ORDER BY 3
+/* 2-For the region with the largest (sum) of sales total_amt_usd, how many total (count) orders were placed?*/
+
+
+/* 3-How many accounts had more total purchases than the account name which has bought the most standard_qty paper throughout their lifetime as a customer?*/
+
+
+/* 4-For the customer that spent the most (in total over their lifetime as a customer) total_amt_usd, how many web_events did they have for each channel?*/
+
+
+/* 5-What is the lifetime average amount spent in terms of total_amt_usd for the top 10 total spending accounts?*/
+
+
+/* 6-What is the lifetime average amount spent in terms of total_amt_usd, including only the companies that spent more per order, on average, than the average of all orders.*/
