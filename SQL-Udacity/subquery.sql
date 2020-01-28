@@ -195,8 +195,7 @@ FROM (SELECT a.name
                          ON o.account_id = a.id
                          GROUP BY 1
                          ORDER BY 2 DESC
-                         LIMIT 1) inner_tab)
-             ) counter_tab; /*3 accounts*/
+                         LIMIT 1) inner_tab)) counter_tab; /*3 accounts*/
 
 /* 4-For the customer that spent the most (in total over their lifetime as a customer) total_amt_usd, how many web_events did they have for each channel?*/
 SELECT a.name AS NameFinal, w.channel, COUNT(w.channel) AS Channel_count
