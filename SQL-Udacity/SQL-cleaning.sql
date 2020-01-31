@@ -144,7 +144,7 @@ SELECT replace(Email, ' ', '') AS email-f
 FROM tab2 /*the same result*/
 /*Udacity solution*/
 WITH t1 AS (
- SELECT LEFT(primary_poc,     STRPOS(primary_poc, ' ') -1 ) first_name,  RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) last_name, name
+ SELECT LEFT(primary_poc, STRPOS(primary_poc, ' ') -1 ) first_name,  RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) last_name, name
  FROM accounts)
 SELECT first_name, last_name, CONCAT(first_name, '.', last_name, '@', REPLACE(name, ' ', ''), '.com')
 FROM  t1;
@@ -175,3 +175,40 @@ SELECT first_name,
       last_name,
       CONCAT(first_name, '.', last_name, '@', name, '.com'), LEFT(LOWER(first_name), 1) || RIGHT(LOWER(first_name), 1) || LEFT(LOWER(last_name), 1) || RIGHT(LOWER(last_name), 1) || LENGTH(first_name) || LENGTH(last_name) || REPLACE(UPPER(name), ' ', '')
 FROM t1;
+
+/*********************/
+/****Quizzes CAST****/
+/*******************/
+/* 1- Write a query to look at the top 10 rows to understand the columns and the raw data in the dataset called sf_crime_data*/
+SELECT *
+FROM sf_crime_data
+LIMIT 10
+/* 2-Remembering back to the lesson on dates, use the Quiz Question at the bottom of this page to make sure you remember the format that dates should use in SQL. Answer is: yy-mm-dd*/
+
+/* 3-Look at the date column in the sf_crime_data table.  Notice the date is not in the correct format. Answer:mm-dd-yy */
+
+/* 4-Write a query to change the date into the correct SQL date format. You will need to use at least SUBSTR and CONCAT to perform this operation.*/
+SELECT date AS org_date, CONCAT(SUBSTR(date, 7, 4),'-',SUBSTR(date, 1, 2),'-',SUBSTR(date, 4, 2)) AS Con_date
+FROM sf_crime_data
+LIMIT 10
+/*Udacity solution*/
+SELECT date orig_date, (SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) || '-' || SUBSTR(date, 4, 2)) new_date
+FROM sf_crime_data
+LIMIT 10;
+
+/* 5-Once you have created a column in the correct format, use either CAST or :: to convert this to a date.*/
+SELECT date AS org_date, CONCAT(SUBSTR(date, 7, 4),'-',SUBSTR(date, 1, 2),'-',SUBSTR(date, 4, 2))::date AS Con_date
+FROM sf_crime_data
+LIMIT 10
+/*Udacity solution*/
+SELECT date orig_date, (SUBSTR(date, 7, 4) || '-' || LEFT(date, 2) || '-' || SUBSTR(date, 4, 2))::DATE new_date
+FROM sf_crime_data;
+
+/*********************/
+/****Quizzes COALESCE****/
+/*******************/
+SELECT COALESCE(account_id, 'account.id')
+FROM accounts a
+LEFT JOIN orders o
+ON a.id = o.account_id
+LIMIT 1
