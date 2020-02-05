@@ -164,7 +164,7 @@ tab2 AS(
   FROM tab1
 )
 SELECT primary_poc, CONCAT(Fname_lettre, Lname_lettre, Len_F, Len_L, CAP_L) AS Pwd
-FROM tab2 /*Udacity solution*/
+FROM tab2
 /*Udacity solution*/
 WITH t1 AS (
  SELECT LEFT(primary_poc, STRPOS(primary_poc, ' ') -1 ) first_name,
@@ -237,9 +237,7 @@ FROM accounts a
 LEFT JOIN orders o
 ON a.id = o.account_id
 
-
-
-
+/*Udacity solution*/
 SELECT *
 FROM accounts a
 LEFT JOIN orders o

@@ -106,7 +106,6 @@ WITH tab AS (
           JOIN region r ON r.id = s.region_id
           GROUP BY r.name
         )
-
 SELECT r.name, COUNT(o.total) total_orders
 FROM sales_reps s
 JOIN accounts a ON a.sales_rep_id = s.id
@@ -186,7 +185,6 @@ FROM t2;
         GROUP BY a.id, a.name
         ORDER BY 3 DESC
         LIMIT 1)
-
 SELECT a.name, w.channel, COUNT(*)
 FROM accounts a
 JOIN web_events w

@@ -198,7 +198,6 @@ JOIN region r
 ON r.id = s.region_id
 GROUP BY r.name, w.channel
 ORDER BY num_events DESC;
-<<<<<<< HEAD
 
 /***************************/
 /****DISTINCT exercices****/
@@ -249,7 +248,7 @@ FROM sales_reps s
 JOIN accounts a ON a.sales_rep_id = s.id
 GROUP BY s.name
 HAVING COUNT(*) > 5
-ORDER BY AccNUM DESC
+ORDER BY AccNUM DESC /*34*/
 /*Udacity solution*/
 SELECT s.id, s.name, COUNT(*) num_accounts
 FROM accounts a
@@ -257,7 +256,7 @@ JOIN sales_reps s
 ON s.id = a.sales_rep_id
 GROUP BY s.id, s.name
 HAVING COUNT(*) > 5
-ORDER BY num_accounts;
+ORDER BY num_accounts; /*34/*
 /*and technically, we can get this using a SUBQUERY as shown below. This same logic can be used for the other queries, but this will not be shown.*/
 SELECT COUNT(*) num_reps_above5
 FROM(SELECT s.id, s.name, COUNT(*) num_accounts
@@ -266,7 +265,7 @@ FROM(SELECT s.id, s.name, COUNT(*) num_accounts
      ON s.id = a.sales_rep_id
      GROUP BY s.id, s.name
      HAVING COUNT(*) > 5
-     ORDER BY num_accounts) AS Table1;
+     ORDER BY num_accounts) AS Table1; /* count the number of lines */
 
 /*How many accounts have more than 20 orders?*/
 SELECT a.name, COUNT(*)
@@ -274,7 +273,7 @@ FROM accounts a
 JOIN orders o ON o.account_id = a.id
 GROUP BY a.name
 HAVING COUNT(*) > 20
-ORDER BY COUNT(*) DESC
+ORDER BY COUNT(*) DESC /*120*/
 /*Udacity solution*/
 SELECT a.id, a.name, COUNT(*) num_orders
 FROM accounts a
@@ -282,7 +281,7 @@ JOIN orders o
 ON a.id = o.account_id
 GROUP BY a.id, a.name
 HAVING COUNT(*) > 20
-ORDER BY num_orders;
+ORDER BY num_orders; /*120*/
 
 /*Which account has the most orders?*/
 SELECT a.name, COUNT(*)
@@ -290,7 +289,7 @@ FROM accounts a
 JOIN orders o ON o.account_id = a.id
 GROUP BY a.name
 ORDER BY COUNT(*) DESC
-LIMIT 1
+LIMIT 1 /*the same result*/
 /*Udacity solution*/
 SELECT a.id, a.name, COUNT(*) num_orders
 FROM accounts a
@@ -298,7 +297,7 @@ JOIN orders o
 ON a.id = o.account_id
 GROUP BY a.id, a.name
 ORDER BY num_orders DESC
-LIMIT 1;
+LIMIT 1; /*the same result*/
 
 /*Which accounts spent more than 30,000 usd total across all orders?*/
 SELECT a.name, SUM(total_amt_usd)
@@ -306,7 +305,7 @@ FROM accounts a
 JOIN orders o ON o.account_id = a.id
 GROUP BY a.name
 HAVING SUM(total_amt_usd) > 30000
-ORDER BY SUM(total_amt_usd) DESC
+ORDER BY SUM(total_amt_usd) DESC /*204*/
 /*Udacity solution*/
 SELECT a.id, a.name, SUM(o.total_amt_usd) total_spent
 FROM accounts a
@@ -314,7 +313,7 @@ JOIN orders o
 ON a.id = o.account_id
 GROUP BY a.id, a.name
 HAVING SUM(o.total_amt_usd) > 30000
-ORDER BY total_spent;
+ORDER BY total_spent; /*204*/
 
 /*Which accounts spent less than 1,000 usd total across all orders?*/
 SELECT a.name, SUM(total_amt_usd)
@@ -322,7 +321,7 @@ FROM accounts a
 JOIN orders o ON o.account_id = a.id
 GROUP BY a.name
 HAVING SUM(total_amt_usd) < 1000
-ORDER BY SUM(total_amt_usd)
+ORDER BY SUM(total_amt_usd) /*3*/
 /*Udacity solution*/
 SELECT a.id, a.name, SUM(o.total_amt_usd) total_spent
 FROM accounts a
@@ -330,7 +329,7 @@ JOIN orders o
 ON a.id = o.account_id
 GROUP BY a.id, a.name
 HAVING SUM(o.total_amt_usd) < 1000
-ORDER BY total_spent;
+ORDER BY total_spent; /*3*/
 
 /*Which account has spent the most with us?*/
 SELECT a.name, SUM(total_amt_usd)
@@ -339,7 +338,7 @@ JOIN orders o ON o.account_id = a.id
 GROUP BY a.name
 HAVING SUM(total_amt_usd) > 30000
 ORDER BY SUM(total_amt_usd) DESC
-LIMIT 1
+LIMIT 1 /* the same result */
 /*Udacity solution*/
 SELECT a.id, a.name, SUM(o.total_amt_usd) total_spent
 FROM accounts a
@@ -347,7 +346,7 @@ JOIN orders o
 ON a.id = o.account_id
 GROUP BY a.id, a.name
 ORDER BY total_spent DESC
-LIMIT 1;
+LIMIT 1; /* the same result */
 
 /*Which account has spent the least with us?*/
 SELECT a.name, SUM(total_amt_usd)
@@ -356,7 +355,7 @@ JOIN orders o ON o.account_id = a.id
 GROUP BY a.name
 HAVING SUM(total_amt_usd) < 1000
 ORDER BY SUM(total_amt_usd)
-LIMIT 1
+LIMIT 1 /* the same result*/
 /*Udacity solution*/
 SELECT a.id, a.name, SUM(o.total_amt_usd) total_spent
 FROM accounts a
@@ -364,7 +363,7 @@ JOIN orders o
 ON a.id = o.account_id
 GROUP BY a.id, a.name
 ORDER BY total_spent
-LIMIT 1;
+LIMIT 1; /*the same result*/
 
 /*Which accounts used facebook as a channel to contact customers more than 6 times?*/
 SELECT a.name, w.channel, COUNT(w.channel)
@@ -409,7 +408,7 @@ JOIN web_events w ON w.account_id = a.id
 GROUP BY w.channel
 ORDER BY COUNT(w.channel) DESC
 LIMIT 1
-
+/*Udacity solution*/
 SELECT a.id, a.name, w.channel, COUNT(*) use_of_channel
 FROM accounts a
 JOIN web_events w
