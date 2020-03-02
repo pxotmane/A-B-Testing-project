@@ -59,22 +59,19 @@ ORDER BY 2 DESC /* 4 elements, southeast:1098137.72*/
 /* step 1: First, I wanted to find the total_amt_usd totals associated with each sales rep, and I also wanted the region in which they were located. The query below provided this information.*/
 SELECT s.name rep_name, r.name region_name, SUM(o.total_amt_usd) total_amt
 FROM sales_reps s
-JOIN accounts a
-ON a.sales_rep_id = s.id
-JOIN orders o
-ON o.account_id = a.id
-JOIN region r
-ON r.id = s.region_id
+JOIN accounts a ON a.sales_rep_id = s.id
+JOIN orders o ON o.account_id = a.id
+JOIN region r ON r.id = s.region_id
 GROUP BY 1,2
 ORDER BY 3 DESC;
 /* step 2: I pulled the max for each region, and then we can use this to pull those rows in our final result.*/
 SELECT region_name, MAX(total_amt) total_amt
      FROM(SELECT s.name rep_name, r.name region_name, SUM(o.total_amt_usd) total_amt
-             FROM sales_reps s
-             JOIN accounts a ON a.sales_rep_id = s.id
-             JOIN orders o ON o.account_id = a.id
-             JOIN region r ON r.id = s.region_id
-             GROUP BY 1, 2) t1
+          FROM sales_reps s
+          JOIN accounts a ON a.sales_rep_id = s.id
+          JOIN orders o ON o.account_id = a.id
+          JOIN region r ON r.id = s.region_id
+          GROUP BY 1, 2) t1
      GROUP BY 1;
 /* step 3: Essentially, this is a JOIN of these two tables, where the region and amount match.*/
 SELECT t3.rep_name, t3.region_name, t3.total_amt

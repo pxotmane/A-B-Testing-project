@@ -556,7 +556,11 @@ GROUP BY 1
 ORDER BY 2 DESC
 
 /* 5-We would like to identify top performing sales reps, which are sales reps associated with more than 200 orders. Create a table with the sales rep name, the total number of orders, and a column with top or not depending on if they have more than 200 orders. Place the top sales people first in your final table.*/
-SELECT s.name, COUNT(*), CASE WHEN COUNT(*) > 200 THEN 'more than 200' WHEN COUNT(*) <= 200 THEN 'less than 200' END AS orders_reps
+SELECT s.name, COUNT(*),
+  CASE
+  WHEN COUNT(*) > 200 THEN 'more than 200'
+  WHEN COUNT(*) <= 200 THEN 'less than 200'
+  END AS orders_reps
 FROM sales_reps s
 JOIN accounts a ON a.sales_rep_id = s.id
 JOIN orders o ON o.account_id = a.id
