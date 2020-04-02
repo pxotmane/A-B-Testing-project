@@ -52,7 +52,6 @@ FROM accounts a
 JOIN orders o
 ON a.id = o.account_id
 GROUP BY CompanyNAME
-ORDER BY CompanyNAME
 /*Udacity solution*/
 SELECT a.name, SUM(total_amt_usd) total_sales
 FROM orders o
