@@ -1,4 +1,3 @@
-# Analyze A/B Testing Results
 
 ## Introduction
 A/B testing is basically a way to compare two versions of something in order to determine the most efficient one. In this project, my goal is to apply the A/BTesting to help decision-makers decide between two choices of proposals or strategies. 
